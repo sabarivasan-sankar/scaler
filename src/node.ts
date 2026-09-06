@@ -41,7 +41,7 @@ class Node {
     const url = new URL(req.url);
 
     const headers = new Headers(req.headers);
-    headers.set("X-Forward-For", clientIp);
+    headers.set("X-Forwarded-For", clientIp);
     headers.set("Host", new URL(this.url).host);
 
     return fetch(this.url + url.pathname, {
