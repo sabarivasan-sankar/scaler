@@ -4,7 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "pullup": "bun run pullup/index.ts"
+    "pullup": "bun run pullup/index.ts",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage"
   },
   "devDependencies": {
     "@types/bun": "latest"
