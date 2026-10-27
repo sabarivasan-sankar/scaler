@@ -9,6 +9,7 @@ class Node {
   protected url: string;
   protected healthEndPoint: string;
   public isHealthy: boolean;
+  public requestCount: number = 0;
   constructor(config: NodeConfig) {
     this.url = config.url;
     this.isHealthy = true;
@@ -38,6 +39,7 @@ class Node {
   }
 
   forwardRequest(req: Request, clientIp: string) {
+    this.requestCount++;
     const url = new URL(req.url);
 
     const headers = new Headers(req.headers);
@@ -49,6 +51,9 @@ class Node {
       headers,
       body: req.body,
       redirect: "manual",
+    }).then((res) => {
+      this.requestCount--;
+      return res;
     });
   }
 }
